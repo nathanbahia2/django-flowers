@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Home | Flores e Plantas</title>
+    <title>Home | Django Flowers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,12 +15,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top shadow p-0">
-        <a href="#" class="navbar-brand">Flores & Plantas</a>
-        <label class="btn text-light pt-1 ml-auto" for='foto'>
-            <span class="material-icons big-icon">add_a_photo</span>
-        </label>
-    </nav>
+    {% include 'core/navbar.html' %}
 
 
     <!-- BANNER -->
@@ -30,11 +25,21 @@
 
     <div class="container text-center">
         <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-        <label 
-            class="btn btn-lg btn-outline-success rounded-lg shadow-lg d-flex justify-content-center align-items-center mx-auto mb-5" for="foto">
-            <span class="material-icons">local_florist</span> 
-            Capturar foto
-        </label>
+
+        {% if request.user.is_authenticated %}
+            <label
+                class="btn btn-lg btn-outline-success rounded-lg shadow-lg d-flex justify-content-center align-items-center mx-auto mb-5" for="foto">
+                <span class="material-icons">local_florist</span>
+                Capturar foto
+            </label>
+        {% else %}
+            <a
+                href="{% url 'google_login' %}"
+                class="btn btn-lg btn-outline-success rounded-lg shadow-lg d-flex justify-content-center align-items-center mx-auto mb-5" for="foto">
+                <span class="material-icons">login</span>
+                Entrar
+            </a>
+        {% endif %}
     </div>
 
     <!-- COMPARTILHAMENTO -->

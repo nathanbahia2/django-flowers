@@ -9,6 +9,9 @@ p {
     background-color: #30B405;
     height: 50px;
 }
+.navbar-collapse {
+    background-color: #258e03;
+}
 .navbar-brand,
 .navbar-brand:focus {
     color: #FAFAFA;
@@ -16,6 +19,9 @@ p {
     font-weight: 600;
     padding: 0 0 8px 8px;
     text-decoration: none;
+}
+.navbar .nav-item a {
+    color: #FAFAFA
 }
 .big-icon {
     font-size: 35px;
@@ -35,12 +41,6 @@ p {
     justify-content: center;
     align-items: center;
     color: white;
-} 
-ul {
-    list-style: none;
-}
-li {
-    margin-bottom: 15px;
 }
 .fotos {
     display: grid;

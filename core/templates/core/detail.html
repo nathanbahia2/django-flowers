@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Detalhes | Flores e Plantas</title>
+    <title>Detalhes | Django Flowers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,12 +15,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top shadow p-0">
-        <a class="btn text-light pt-1" href="{%url 'index' %}">
-            <span class="material-icons big-icon">arrow_back_ios</span>
-        </a>
-        <a href="#" class="navbar-brand">Flores & Plantas</a>
-    </nav>
+    {% include 'core/navbar.html' %}
 
     
     <div class="container banner">
