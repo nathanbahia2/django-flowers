@@ -1,0 +1,48 @@
+body {
+    font-family: 'Helvetica';
+    background: #EEE;
+}
+p {
+    font-size: 16px;
+}
+.navbar {
+    background-color: #30B405;
+    height: 50px;
+}
+.navbar-brand,
+.navbar-brand:focus {
+    color: #FAFAFA;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 0 0 8px 8px;
+    text-decoration: none;
+}
+.big-icon {
+    font-size: 35px;
+}
+.banner {
+    margin-top: 75px;
+}  
+.title {
+    font-size: 18px;
+    font-weight: bold;
+} 
+#loading {
+    position: fixed;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+} 
+ul {
+    list-style: none;
+}
+li {
+    margin-bottom: 15px;
+}
+.fotos {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}

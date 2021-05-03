@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html>
+
+<head>
+    <title>Detalhes | Flores e Plantas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    {% bootstrap_css %}    
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow p-0">
+        <a class="btn text-light pt-1" href="{%url 'index' %}">
+            <span class="material-icons big-icon">arrow_back_ios</span>
+        </a>
+        <a href="#" class="navbar-brand">Flores & Plantas</a>
+    </nav>
+
+    
+    <div class="container banner">
+        <div class="jumbotron p-3 shadow">
+            <span class="title">Sua foto:</span>
+            <div class="text-center">
+                <img src="{{ url_imagem }}" class='img-fluid mt-3'>
+            </div>
+        </div>
+
+        {% if info %}
+            {% for i in info %}
+                <div class="jumbotron p-3 shadow mb-4">
+                    <span class="title">Nome: <u>{{ i.nome|upper }}</u></span>
+                    <div class="alert alert-primary mt-3 p-2">
+                        <ul class='ml-o pl-0'>
+                            {% if i.nomes_comuns %}
+                                <li><b>Nomes comuns: </b>{{ i.nomes_comuns|upper }}</li>
+                            {% endif %}
+                            <li><b>Probabilidade: </b>{{ i.probabilidade|floatformat:2 }}%</li>
+                            {% if i.wiki %}
+                                <li>
+                                    <a target="_blank" href="{{ i.wiki }}">
+                                        <b class="d-flex align-items-center p-0 m-0">
+                                            <span class="material-icons">language</span>Wikipédia...
+                                        </b>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="fotos">
+                        {% for imagem in i.imagens %}
+                            <img src="{{ imagem }}" class='img-fluid'>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+                <div class="alert alert-warning">
+                    Não foi encontrada nenhuma correspondência para sua foto :(
+                </div>
+        {% endif %}
+    </div>
+
+
+    <!-- COMPARTILHAMENTO -->
+    <div class="container my-4">
+        <div class='title text-center'>Compartilhe em suas redes sociais</span>
+        <div class="a2a_kit a2a_kit_size_32 d-flex justify-content-center">
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_whatsapp"></a>
+            <a class="a2a_button_telegram"></a>
+            <a class="a2a_button_copy_link"></a>
+        </div>
+    </div>
+
+    
+    {% bootstrap_javascript jquery="full" %}
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+
+</body>
+</html>

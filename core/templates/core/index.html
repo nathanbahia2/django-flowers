@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html>
+
+<head>
+    <title>Home | Flores e Plantas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    {% bootstrap_css %}
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow p-0">
+        <a href="#" class="navbar-brand">Flores & Plantas</a>
+        <label class="btn text-light pt-1 ml-auto" for='foto'>
+            <span class="material-icons big-icon">add_a_photo</span>
+        </label>
+    </nav>
+
+
+    <!-- BANNER -->
+    <div class="container-fluid banner text-center">
+        <img src="{% static 'img/banner.png' %}" alt="banner" width="auto" height="350">
+    </div>
+
+    <div class="container text-center">
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+        <label 
+            class="btn btn-lg btn-outline-success rounded-lg shadow-lg d-flex justify-content-center align-items-center mx-auto mb-5" for="foto">
+            <span class="material-icons">local_florist</span> 
+            Capturar foto
+        </label>
+    </div>
+
+    <!-- COMPARTILHAMENTO -->
+    <div class="container my-4">
+        <div class='title text-center'>Compartilhe em suas redes sociais</span>
+        <div class="a2a_kit a2a_kit_size_32 d-flex justify-content-center">
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_whatsapp"></a>
+            <a class="a2a_button_telegram"></a>
+            <a class="a2a_button_copy_link"></a>
+        </div>
+    </div>
+
+    <!-- MODAL DE SALVAMENTO -->
+    <div class="modal" id="modal-salvamento" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Salvar foto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" alt="" id='modal-img' class='img-fluid mb-5'>
+                    
+                    <form method='post' enctype="multipart/form-data" id='formulario-foto'>
+                        {% csrf_token %}
+                        <input type="file" id='foto' name='foto' accept="image/jpg,image/png,image/jpeg" hidden>   
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" id="btn-submit-form" class="btn btn-primary ml-2">Salvar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CARREGANDO -->
+    <div id="loading" hidden>
+        <div class='d-block text-center'>
+            <div class="spinner-border" role="status"></div>
+            <div class="text-light">Por favor, aguarde...</div>
+        </div>
+    </div>
+
+    
+    {% bootstrap_javascript jquery="full" %}
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    <script>
+        $('#foto').on('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                $('#modal-img').attr('src', event.target.result);
+                $('#modal-salvamento').modal();
+            }
+            reader.readAsDataURL(file);
+        });
+
+        $('#formulario-foto').on('submit', function () {
+            $('#loading').attr('hidden', false).show();
+            $('#modal-salvamento').hide();
+            $('.modal-backgdrop').remove();
+            $('[for="foto"]').each(el => $(el).attr('hidden', true).hide());
+        });
+    </script>
+
+</body>
+</html>
