@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-182mt)ud+91noau_k@=#-*3ns0p83nw3$g)6xxjepr&sng7bz=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'djangoflowers.pythonanywhere.com']
+ALLOWED_HOSTS = ['*', 'djangoflowers.pythonanywhere.com', 'djangoflowers.herokuapp.com']
 
 
 # Application definition
