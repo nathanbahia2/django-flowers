@@ -5,9 +5,6 @@ from core import utils
 
 
 def index(request):
-    print(dir(request.user))
-    print(type(request.user))
-
     if request.user.is_authenticated:
         if request.method == "POST":
             foto = request.FILES.get('foto')

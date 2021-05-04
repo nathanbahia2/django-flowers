@@ -86,7 +86,10 @@ WSGI_APPLICATION = 'projeto.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = dict()
-DATABASES['default'] = 'postgres://pfwslnzmmtslfe:b92aac0bc4c4c0cbf3ee029df8e897d4cd2c808bbed0990a2622b2ae9719bf81@ec2-184-73-198-174.compute-1.amazonaws.com:5432/daodmlbb8qje1e'
+DATABASES['default'] = dj_database_url.parse(
+    'postgres://pfwslnzmmtslfe:b92aac0bc4c4c0cbf3ee029df8e897d4cd2c808bbed0990a2622b2ae9719bf81@ec2-184-73-198-174.'
+    'compute-1.amazonaws.com:5432/daodmlbb8qje1e'
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
