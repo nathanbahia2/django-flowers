@@ -5,6 +5,9 @@ from core import utils
 
 
 def index(request):
+    print(dir(request.user))
+    print(type(request.user))
+
     if request.user.is_authenticated:
         if request.method == "POST":
             foto = request.FILES.get('foto')
@@ -30,7 +33,7 @@ def detail(request, pk):
         if nomes_comuns:
             nomes_comuns = ', '.join(nomes_comuns)
 
-        if probabilidade >= 50:
+        if probabilidade >= 30:
             d = {
                 'nome': sugestao.get('plant_name', 'Não identificado'),
                 'probabilidade': probabilidade,
@@ -46,3 +49,19 @@ def detail(request, pk):
         'info': info,
     }
     return render(request, 'core/detail.html', context)
+
+
+def capturas_usuario(request):
+    if request.user.is_anonymous:
+        return redirect('google_login')
+
+    usuario = request.user
+    capturas = list()
+    query = Captura.objects.filter(usuario=usuario)
+    for q in query:
+        capturas.append({
+            'pk': q.pk,
+            'url':  eval(q.json).get('images')[0].get('url')
+        })
+    context = {'capturas': capturas}
+    return render(request, 'core/capturas.html', context)

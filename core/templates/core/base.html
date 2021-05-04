@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html>
+
+<head>
+    <title>Home | Django Flowers</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500&family=Roboto&display=swap" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    {% bootstrap_css %}
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    {% include 'core/navbar.html' %}
+
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- COMPARTILHAMENTO -->
+    <div class="container my-4">
+        <div class='title text-center'>Compartilhe em suas redes sociais</span>
+        <div class="a2a_kit a2a_kit_size_32 d-flex justify-content-center">
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_whatsapp"></a>
+            <a class="a2a_button_telegram"></a>
+            <a class="a2a_button_copy_link"></a>
+        </div>
+    </div>
+
+    <!-- MODAL DE SALVAMENTO -->
+    <div class="modal" id="modal-salvamento" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Salvar foto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" alt="" id='modal-img' class='img-fluid mb-5'>
+
+                    <form method='post' enctype="multipart/form-data" id='formulario-foto'>
+                        {% csrf_token %}
+                        <input type="file" id='foto' name='foto' accept="image/jpg,image/png,image/jpeg" hidden>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" id="btn-submit-form" class="btn btn-primary ml-2">Salvar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CARREGANDO -->
+    <div id="loading" hidden>
+        <div class='d-block text-center'>
+            <div class="spinner-border" role="status"></div>
+            <div class="text-light">Por favor, aguarde...</div>
+        </div>
+    </div>
+
+
+    {% bootstrap_javascript jquery="full" %}
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    <script>
+        $('#foto').on('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                $('#modal-img').attr('src', event.target.result);
+                $('#modal-salvamento').modal();
+            }
+            reader.readAsDataURL(file);
+        });
+
+        $('#formulario-foto').on('submit', function () {
+            $('#loading').attr('hidden', false).show();
+            $('#modal-salvamento').hide();
+            $('.modal-backgdrop').remove();
+            $('[for="foto"]').each(el => $(el).attr('hidden', true).hide());
+        });
+    </script>
+
+</body>
+</html>
