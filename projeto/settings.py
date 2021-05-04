@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
 import dj_database_url
 
 
@@ -27,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '-182mt)ud+91noau_k@=#-*3ns0p83nw3$g)6xxjepr&sng7bz='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool, default=False)
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,7 +86,7 @@ WSGI_APPLICATION = 'projeto.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = dict()
-DATABASES['default'] = dj_database_url.parse(config('DATABASE_URL'))
+DATABASES['default'] = 'postgres://pfwslnzmmtslfe:b92aac0bc4c4c0cbf3ee029df8e897d4cd2c808bbed0990a2622b2ae9719bf81@ec2-184-73-198-174.compute-1.amazonaws.com:5432/daodmlbb8qje1e'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
