@@ -13,21 +13,22 @@
             Comece já a registrar suas fotos e conhecer mais sobre as plantas ao seu redor. <b>Django Flowers</b> é um projeto
             Open Source e está disponível neste <a href="#">link</a> do Github.
         </p>
-
-        {% if request.user.is_authenticated %}
-            <label
-                class="btn btn-lg btn-outline-success rounded-lg shadow-lg d-flex justify-content-center align-items-center mx-auto mb-5" for="foto">
-                <span class="material-icons">local_florist</span>
-                Capturar foto
-            </label>
-        {% else %}
-            <a
-                href="{% url 'google_login' %}"
-                class="btn btn-lg btn-outline-success rounded-lg shadow-lg d-flex justify-content-center align-items-center mx-auto mb-5" for="foto">
-                <span class="material-icons">login</span>
-                Entrar
-            </a>
-        {% endif %}
+        <div class="my-5">
+            {% if request.user.is_authenticated %}
+                <label
+                    class="btn btn-lg btn-outline-success rounded-lg shadow-lg d-flex justify-content-center align-items-center mx-auto mb-5" for="foto">
+                    <span class="material-icons">local_florist</span>
+                    Capturar foto
+                </label>
+            {% else %}
+                <a
+                    href="{% url 'google_login' %}"
+                    class="btn btn-lg btn-outline-success rounded-lg shadow d-flex justify-content-center align-items-center mx-auto mb-5">
+                    <span class="material-icons">login</span>
+                    Entrar
+                </a>
+            {% endif %}
+        </div>
     </div>
 
 {% endblock %}

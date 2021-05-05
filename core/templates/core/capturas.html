@@ -2,19 +2,19 @@
 
 {% block content %}
 
-    <div style="margin-top: 70px">
-        <div class="row mx-0 p-1">
+    <div style="margin-top: 70px" class="container">
+        <div class="title">Galeria</div>
+        <div class="card-columns p-2 mt-3">
             {% for captura in capturas %}
-                <div class="col-6 p-1 h-100">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <img src="{{ captura.url }}" alt="" class="img-fluid">
+                            <p class="text-muted">{{ captura.data }}</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="{% url 'detalhes' captura.pk %}" class="btn btn-outline-success">Visualizar</a>
                         </div>
                     </div>
-                </div>
             {% endfor %}
         </div>
     </div>

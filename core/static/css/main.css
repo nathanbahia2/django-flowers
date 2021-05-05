@@ -50,3 +50,6 @@ p {
     grid-template-columns: 50% 50%;
     margin-top: 20px;
 }
+.card-columns {
+    column-count: 2;
+}

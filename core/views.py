@@ -9,8 +9,8 @@ def index(request):
         if request.method == "POST":
             foto = request.FILES.get('foto')
             planta = utils.identify_plant(foto)
-            captura = Captura.objects.create(json=planta)
-            return redirect('detail', captura.pk)
+            captura = Captura.objects.create(json=planta, usuario=request.user)
+            return redirect('detalhes', captura.pk)
     return render(request, 'core/index.html')
 
 
@@ -58,6 +58,7 @@ def capturas_usuario(request):
     for q in query:
         capturas.append({
             'pk': q.pk,
+            'data': q.data.strftime('%d/%m/%Y %H:%M'),
             'url':  eval(q.json).get('images')[0].get('url')
         })
     context = {'capturas': capturas}
