@@ -28,7 +28,7 @@ SECRET_KEY = '-182mt)ud+91noau_k@=#-*3ns0p83nw3$g)6xxjepr&sng7bz='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'djangoflowers.herokuapp.com']
 
 
 # Application definition
@@ -143,7 +143,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend'
 )
 
-SITE_ID = 1
+SITE_ID = 3
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
