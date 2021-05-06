@@ -2,29 +2,31 @@
 
 {% block content %}
     <div class="container banner">
-        <div class="jumbotron p-3 shadow">
-            <span class="title">Sua foto:</span>
+        <div class="card p-2 shadow mt-3 mb-5">
+            <p class="text-muted">Data: {{ captura.data|date:'d/m/Y H:i' }}</p>
             <div class="text-center">
-                <img src="{{ url_imagem }}" class='img-fluid mt-3'>
+                <img src="{{ url_imagem }}" width="100%" height="auto" alt="">
             </div>
         </div>
 
+        <h4 class="text-info">Resultados da análise...</h4>
         {% if info %}
             {% for i in info %}
-                <div class="jumbotron p-3 shadow mb-4">
-                    <div class="title"><b>Nome: </b>{{ i.nome }}</div>
+                <div class="card p-3 shadow mb-4">
+                    <div class="title mb-2"><b>Nome: </b>{{ i.nome }}</div>
                     {% if i.nomes_comuns %}
-                       <div><b>Nomes comuns: </b>{{ i.nomes_comuns|upper }}</div>
+                       <div class="title mb-2"><b>Nomes comuns: </b>{{ i.nomes_comuns|upper }}</div>
                     {% endif %}
-                    <div><b>Probabilidade: </b>{{ i.probabilidade|floatformat:2 }}%</div>
+                    <div class="title mb-2"><b>Probabilidade: </b>{{ i.probabilidade|floatformat:2 }}%</div>
                     {% if i.wiki %}
-                        <div><b>Ver sobre: </b><a target="_blank" href="{{ i.wiki }}">Wikipédia</a></div>
+                        <div class="title mb-2"><b>Para saber mais <a target="_blank" href="{{ i.wiki }}">clique aqui</a></b></div>
                     {% endif %}
-                    <div class="fotos">
+                    {% if i.imagens %}
+                        <div class="title my-2">Fotos semelhantes...</div>
                         {% for imagem in i.imagens %}
-                            <img src="{{ imagem }}" class='img-fluid'>
+                            <img src="{{ imagem }}" width="100%" height="auto" alt="" class="my-2">
                         {% endfor %}
-                    </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         {% else %}

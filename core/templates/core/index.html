@@ -9,10 +9,6 @@
     </div>
 
     <div class="container text-center">
-        <p>
-            Comece já a registrar suas fotos e conhecer mais sobre as plantas ao seu redor. <b>Django Flowers</b> é um projeto
-            Open Source e está disponível neste <a href="#">link</a> do Github.
-        </p>
         <div class="my-5">
             {% if request.user.is_authenticated %}
                 <label
@@ -29,6 +25,10 @@
                 </a>
             {% endif %}
         </div>
+        <p>
+            Comece já a registrar suas fotos e conhecer mais sobre as plantas ao seu redor. <b>Django Flowers</b> é um projeto
+            Open Source e está disponível neste <a href="#">link</a> do Github.
+        </p>
     </div>
 
 {% endblock %}

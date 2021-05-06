@@ -23,17 +23,6 @@
     {% block content %}
     {% endblock %}
 
-    <!-- COMPARTILHAMENTO -->
-    <div class="container mt-5 pt-5">
-        <div class='title text-center'>Compartilhe em suas redes sociais</span>
-        <div class="a2a_kit a2a_kit_size_32 d-flex justify-content-center">
-            <a class="a2a_button_facebook"></a>
-            <a class="a2a_button_whatsapp"></a>
-            <a class="a2a_button_telegram"></a>
-            <a class="a2a_button_copy_link"></a>
-        </div>
-    </div>
-
     <!-- MODAL DE SALVAMENTO -->
     <div class="modal" id="modal-salvamento" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
@@ -72,7 +61,6 @@
 
 
     {% bootstrap_javascript jquery="full" %}
-    <script async src="https://static.addtoany.com/menu/page.js"></script>
     <script>
         $('#foto').on('change', function () {
             $('.navbar-collapse').removeClass('show');

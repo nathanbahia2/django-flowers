@@ -44,6 +44,7 @@ def detail(request, pk):
     context = {
         'url_imagem': url_imagem,
         'info': info,
+        'captura': captura
     }
     return render(request, 'core/detail.html', context)
 
@@ -59,6 +60,7 @@ def capturas_usuario(request):
         capturas.append({
             'pk': q.pk,
             'data': q.data.strftime('%d/%m/%Y %H:%M'),
+            'nome':  eval(q.json).get('suggestions', [{'plant_name', 'Não identificado'}])[0].get('plant_name'),
             'url':  eval(q.json).get('images')[0].get('url')
         })
     context = {'capturas': capturas}
