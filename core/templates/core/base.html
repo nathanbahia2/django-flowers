@@ -38,7 +38,7 @@
 
                     <form method='post' action="{% url 'index' %}" enctype="multipart/form-data" id='formulario-foto'>
                         {% csrf_token %}
-                        <input type="file" id='foto' name='foto' accept="image/jpg,image/png,image/jpeg" hidden>
+                        <input capture="camera" type="file" id='foto' name='foto' accept="image/jpg,image/png,image/jpeg" hidden>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" id="btn-submit-form" class="btn btn-primary ml-2">Salvar</button>

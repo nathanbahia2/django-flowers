@@ -1,9 +1,9 @@
 body {
     background: #EEE;
+    font-family: 'Montserrat', sans-serif !important;
 }
 p {
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
     font-weight: 300;
     color: #121212
 }
@@ -13,9 +13,9 @@ p {
 }
 .navbar-collapse {
     background-color: #30B405;
+    z-index: 10;
 }
-.navbar-brand,
-.navbar-brand:focus {
+.navbar-brand {
     color: #FAFAFA !important;
     font-size: 24px;
     font-weight: 600;
@@ -25,12 +25,6 @@ p {
 .nav-link {
     color: #FAFAFA
 }
-.big-icon {
-    font-size: 35px;
-}
-.banner {
-    margin-top: 75px;
-}  
 .title {
     font-size: 18px;
     font-weight: normal;
@@ -45,11 +39,6 @@ p {
     align-items: center;
     color: white;
 }
-.fotos {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin-top: 20px;
-}
-.card-columns {
-    column-count: 2;
+.card {
+    max-width: 400px;
 }

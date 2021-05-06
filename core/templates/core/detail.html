@@ -1,7 +1,11 @@
 {% extends 'core/base.html' %}
 
+{% block link_back %}
+    <a href="javascript:history.back()"><span class="material-icons">home</span></a>
+{% endblock %}
+
 {% block content %}
-    <div class="container banner">
+    <div class="container">
         <div class="card p-2 shadow mt-3 mb-5">
             <p class="text-muted">Data: {{ captura.data|date:'d/m/Y H:i' }}</p>
             <div class="text-center">
@@ -9,7 +13,7 @@
             </div>
         </div>
 
-        <h4 class="text-info">Resultados da análise...</h4>
+        <h4 class="text-info mb-3">Resultados da análise...</h4>
         {% if info %}
             {% for i in info %}
                 <div class="card p-3 shadow mb-4">

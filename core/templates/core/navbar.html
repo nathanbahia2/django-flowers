@@ -1,28 +1,39 @@
-<nav class="navbar navbar-expand-lg fixed-top shadow px-0">
-    <a href="{% url 'index' %}" class="navbar-brand title d-flex align-items-center"><span class="material-icons">home</span>   Django Flowers</a>
+<nav class="navbar navbar-expand-xg shadow px-0">
+    <span class="navbar-brand title d-flex align-items-center justify-content-center">
+        {% if request.path != '/' %}
+            <a href="javascript:history.back()" class="text-light">
+                <span class="material-icons">arrow_back_ios</span>
+            </a>
+        {% endif %}
+         Django Flowers
+    </span>
     {% if request.user.is_authenticated %}
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="material-icons">menu</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <hr>
+            <ul class="navbar-nav ml-auto text-center">
+                <li class="nav-item border border-light p-2">
+                    <a class="btn text-light" href="{% url 'index' %}">Página inicial</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item border border-light p-2">
                     <button class="btn text-light" onclick="$('#foto').click()">
-                        <span class="material-icons">add_a_photo</span> Nova foto
+                        Nova foto
                     </button>
                 </li>
-                <li class="nav-item">
-                    <a class="btn text-light" href="{% url 'capturas_usuario' %}"><span class="material-icons">collections</span> Galeria</a>
+                <li class="nav-item border border-light p-2">
+                    <a class="btn text-light" href="{% url 'capturas_usuario' %}">Galeria</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item border border-light p-2">
                     <a class="btn text-light"
-                       href="{% url 'account_logout' %}"><span class="material-icons">logout</span> Sair</a>
+                       href="{% url 'account_logout' %}">Sair</a>
                 </li>
             </ul>
         </div>
     {% endif %}
 </nav>
+
+{% if request.user.is_authenticated %}
+    <div class="title text-right mr-2 mt-3 text-success">Olá, {{ request.user.first_name }}!</div>
+{% endif %}
