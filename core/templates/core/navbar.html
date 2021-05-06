@@ -34,6 +34,6 @@
     {% endif %}
 </nav>
 
-{% if request.user.is_authenticated %}
+{% if request.user.is_authenticated and request.user.first_name and request.user.first_name != '' %}
     <div class="title text-right mr-2 mt-3 text-success">Olá, {{ request.user.first_name }}!</div>
 {% endif %}
