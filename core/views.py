@@ -65,3 +65,9 @@ def capturas_usuario(request):
         })
     context = {'capturas': capturas}
     return render(request, 'core/capturas.html', context)
+
+
+def logout(request):
+    if request.user.is_anonymous:
+        return redirect('google_login')
+    return render(request, 'core/logout.html')
