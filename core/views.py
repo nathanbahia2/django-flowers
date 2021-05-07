@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from core.models import Captura
 from core import utils
@@ -14,59 +15,27 @@ def index(request):
     return render(request, 'core/index.html')
 
 
+@login_required
 def detail(request, pk):
     if request.user.is_anonymous:
         return redirect('google_login')
 
     captura = Captura.objects.get(pk=pk)
-    data = eval(captura.json)
-    url_imagem = data.get('images')[0].get('url')
-    sugestoes = data.get('suggestions')
-    info = list()
-
-    for sugestao in sugestoes:
-        probabilidade = float(sugestao.get('probability', 0)) * 100
-        nomes_comuns = sugestao.get('plant_details').get('common_names')
-        if nomes_comuns:
-            nomes_comuns = ', '.join(nomes_comuns)
-
-        if probabilidade >= 30:
-            d = {
-                'nome': sugestao.get('plant_name', 'Não identificado'),
-                'probabilidade': probabilidade,
-                'nomes_comuns': nomes_comuns,
-                'wiki': sugestao.get('plant_details').get('url'),
-                'imagens': []     
-            }
-            for imagem in sugestao.get('similar_images'):
-                d['imagens'].append(imagem.get('url'))
-            info.append(d)
-    context = {
-        'url_imagem': url_imagem,
-        'info': info,
-        'captura': captura
-    }
+    informacoes, url_imagem = utils.get_detalhe_captura(captura)
+    context = {'url_imagem': url_imagem, 'info': informacoes, 'captura': captura}
     return render(request, 'core/detail.html', context)
 
 
+@login_required
 def capturas_usuario(request):
     if request.user.is_anonymous:
         return redirect('google_login')
-
-    usuario = request.user
-    capturas = list()
-    query = Captura.objects.filter(usuario=usuario)
-    for q in query:
-        capturas.append({
-            'pk': q.pk,
-            'data': q.data.strftime('%d/%m/%Y %H:%M'),
-            'nome':  eval(q.json).get('suggestions', [{'plant_name', 'Não identificado'}])[0].get('plant_name'),
-            'url':  eval(q.json).get('images')[0].get('url')
-        })
+    capturas = utils.get_lista_capturas_usuario(request.user)
     context = {'capturas': capturas}
     return render(request, 'core/capturas.html', context)
 
 
+@login_required
 def logout(request):
     if request.user.is_anonymous:
         return redirect('google_login')

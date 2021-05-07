@@ -7,13 +7,14 @@
 {% block content %}
     <div class="container">
         <div class="card p-2 shadow mt-3 mb-5">
+            <p class="font-weight-bold">Sua foto</p>
             <p class="text-muted">Data: {{ captura.data|date:'d/m/Y H:i' }}</p>
             <div class="text-center">
                 <img src="{{ url_imagem }}" width="100%" height="auto" alt="">
             </div>
         </div>
 
-        <h4 class="text-info mb-3">Resultados da análise...</h4>
+        <h5 class="text-info mb-3">Resultados da análise...</h5>
         {% if info %}
             {% for i in info %}
                 <div class="card p-3 shadow mb-4">
@@ -26,7 +27,7 @@
                         <div class="title mb-2"><b>Para saber mais <a target="_blank" href="{{ i.wiki }}">clique aqui</a></b></div>
                     {% endif %}
                     {% if i.imagens %}
-                        <div class="title my-2">Fotos semelhantes...</div>
+                        <div class="title my-2">Fotos semelhantes:</div>
                         {% for imagem in i.imagens %}
                             <img src="{{ imagem }}" width="100%" height="auto" alt="" class="my-2">
                         {% endfor %}
