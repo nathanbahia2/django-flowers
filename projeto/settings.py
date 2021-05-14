@@ -158,3 +158,6 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+# API KEY PLANT ID
+API_KEY = config('API_KEY')

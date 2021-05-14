@@ -1,6 +1,8 @@
 import base64
 import requests
 
+from django.conf import settings
+
 from core.models import Captura
 
 
@@ -12,18 +14,17 @@ def encode_file(file):
 def identify_plant(file):
     image = [encode_file(file)]
 
-    # see the docs for more optional attributes
     params = {
-        "api_key": "ElF0gb6R7Nhxa743aLRk7ySapitGYed4RJEaWTmnfKwAtC8z90",
+        "api_key": settings.API_KEY,
         "images": image,
         "modifiers": ["crops_fast", "similar_images"],
         "plant_language": "pt",
         "plant_details": ["common_names", "taxonomy", "url"]
-        }
+    }
 
-    headers = { "Content-Type": "application/json" }
+    headers = {"Content-Type": "application/json"}
 
-    response = requests.post("https://api.plant.id/v2/identify", json=params,  headers=headers)
+    response = requests.post("https://api.plant.id/v2/identify", json=params, headers=headers)
 
     return response.json()
 
@@ -31,12 +32,12 @@ def identify_plant(file):
 def get_detalhe_captura(captura):
     data = eval(captura.json)
     url_imagem = data.get('images')[0].get('url')
-    sugestoes = data.get('suggestions')
+    sugestoes = data.get('suggestions', {})
     info = list()
 
     for sugestao in sugestoes:
         probabilidade = float(sugestao.get('probability', 0)) * 100
-        nomes_comuns = sugestao.get('plant_details').get('common_names')
+        nomes_comuns = sugestao.get('plant_details', {}).get('common_names')
         if nomes_comuns:
             nomes_comuns = ', '.join(nomes_comuns)
 
@@ -45,10 +46,10 @@ def get_detalhe_captura(captura):
                 'nome': sugestao.get('plant_name', 'Não identificado'),
                 'probabilidade': probabilidade,
                 'nomes_comuns': nomes_comuns,
-                'wiki': sugestao.get('plant_details').get('url'),
+                'wiki': sugestao.get('plant_details', {}).get('url'),
                 'imagens': []
             }
-            for imagem in sugestao.get('similar_images'):
+            for imagem in sugestao.get('similar_images', {}):
                 d['imagens'].append(imagem.get('url'))
             info.append(d)
     return info, url_imagem
